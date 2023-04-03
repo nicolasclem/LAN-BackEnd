@@ -9,17 +9,26 @@ const app = express();
 //config cors
 app.use(cors());
 
+// data body
+app.use(express.json());
+
 //DbConnection
 dbConnection();
 
 //routes
-app.get('/',(req,res)=>{
 
-    res.json({
-        ok:true,
-        msg:"Hola Mundo"
-    })
-});
+app.use('/api/users', require('./routes/users'));
+app.use('/api/login', require('./routes/auth'));
+// app.get('/users',(req,res)=>{
+
+//     res.json({
+//         ok:true,
+//         users:[{
+//             "id":123,
+//             "Nombre":"nico"
+//         }]
+//         })
+// });
 
 
 app.listen(process.env.PORT,()=>{
